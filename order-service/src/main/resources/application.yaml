@@ -1,0 +1,32 @@
+server:
+  port: 8084
+  servlet:
+    context-path: /order
+
+spring:
+  application:
+    name: identity-service
+  datasource:
+    url: "jdbc:mysql://localhost:3307/vorder_order_service?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false"
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+    username: root
+    password: viet12345
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  kafka:
+    bootstrap-servers: localhost:9094
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+app:
+  services:
+    cart: http://localhost:8081
+    identity: http://localhost:8080
+
+logging:
+  level:
+    org.springframework.cloud.openfeign: DEBUG
+    com.vorder: DEBUG
+
