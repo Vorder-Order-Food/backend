@@ -24,6 +24,7 @@ app:
   services:
     cart: http://localhost:8081
     identity: http://localhost:8080
+    inventory: http://localhost:8085
 
 logging:
   level:

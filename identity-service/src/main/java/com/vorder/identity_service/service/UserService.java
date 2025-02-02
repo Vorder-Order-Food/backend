@@ -4,7 +4,6 @@ package com.vorder.identity_service.service;
 import com.vorder.event.NotificationEvent;
 import com.vorder.identity_service.constant.PredefinedRole;
 import com.vorder.identity_service.dto.ApiResponse;
-import com.vorder.identity_service.dto.UserDto;
 import com.vorder.identity_service.dto.request.CreateCartRequest;
 import com.vorder.identity_service.dto.request.UserCreationRequest;
 import com.vorder.identity_service.dto.request.UserUpdateRequest;

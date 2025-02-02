@@ -9,7 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
       </profile>
-      <profile name="Annotation profile for notification-service" enabled="true">
+      <profile name="Annotation profile for inventory-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -24,6 +24,7 @@
         </processorPath>
         <module name="product-service" />
         <module name="cart-service" />
+        <module name="inventory-service" />
         <module name="order-service" />
         <module name="identity-service" />
         <module name="notification-service" />
@@ -35,6 +36,7 @@
       <module name="api-gateway" options="-parameters" />
       <module name="cart-service" options="-parameters -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring -Amapstruct.verbose=true" />
       <module name="identity-service" options="-parameters -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.verbose=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="inventory-service" options="-parameters -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.verbose=true -Amapstruct.defaultComponentModel=spring" />
       <module name="notification-service" options="-parameters -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.verbose=true -Amapstruct.defaultComponentModel=spring" />
       <module name="order-service" options="-parameters -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.verbose=true -Amapstruct.defaultComponentModel=spring" />
       <module name="product-service" options="-parameters -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring -Amapstruct.verbose=true" />

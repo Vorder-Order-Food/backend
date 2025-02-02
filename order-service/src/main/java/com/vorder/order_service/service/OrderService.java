@@ -7,13 +7,14 @@ import com.vorder.order_service.dto.CartDto;
 import com.vorder.order_service.dto.CartItemDto;
 import com.vorder.order_service.dto.UserDto;
 import com.vorder.order_service.dto.request.OrderRequest;
-import com.vorder.order_service.dto.response.OrderResponse;
 import com.vorder.order_service.entity.Order;
 import com.vorder.order_service.entity.OrderItem;
-import com.vorder.order_service.mapper.OrderMapper;
+import com.vorder.order_service.exception.AppException;
+import com.vorder.order_service.exception.ErrorCode;
 import com.vorder.order_service.repository.OrderItemRepository;
 import com.vorder.order_service.repository.OrderRepository;
 import com.vorder.order_service.repository.http.CartClient;
+import com.vorder.order_service.repository.http.InventoryClient;
 import com.vorder.order_service.repository.http.UserClient;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +43,7 @@ public class OrderService {
     OrderItemRepository orderItemRepository;
     UserClient userClient ;
     KafkaTemplate<String, Object> kafkaTemplate;
+    InventoryClient inventoryClient;
 
 
     public Order createOrder(OrderRequest orderRequest) {
@@ -57,16 +59,28 @@ public class OrderService {
 
         List<OrderItem> orderItems = new ArrayList<>();
 
-        for (CartItemDto cartItem : cartDto.getItems()) {
-            OrderItem orderItem = new OrderItem();
-            orderItem.setProductId(cartItem.getProductId());
-            orderItem.setProductName(cartItem.getProductName());
-            orderItem.setProductPrice(cartItem.getProductPrice());
-            orderItem.setQuantity(cartItem.getQuantity());
-            orderItem.setTotalPrice(cartItem.getTotalPrice());
 
-            OrderItem savedOrderItem = orderItemRepository.save(orderItem);
-            orderItems.add(savedOrderItem);
+
+        for (CartItemDto cartItem : cartDto.getItems()) {
+
+
+            var isInStock = inventoryClient.isInStock(cartItem.getProductId(), cartItem.getQuantity());
+
+            if(isInStock){
+                OrderItem orderItem = new OrderItem();
+                orderItem.setProductId(cartItem.getProductId());
+                orderItem.setProductName(cartItem.getProductName());
+                orderItem.setProductPrice(cartItem.getProductPrice());
+                orderItem.setQuantity(cartItem.getQuantity());
+                orderItem.setTotalPrice(cartItem.getTotalPrice());
+
+                OrderItem savedOrderItem = orderItemRepository.save(orderItem);
+                orderItems.add(savedOrderItem);
+            } else {
+                throw new AppException(ErrorCode.OUT_OF_STOCK);
+            }
+
+
         }
 
         Long totalPrice = orderItems.stream()
@@ -91,7 +105,6 @@ public class OrderService {
                 .build();
 
         kafkaTemplate.send("notification-send", notificationEvent);
-
 
         return savedOrder;
     }
