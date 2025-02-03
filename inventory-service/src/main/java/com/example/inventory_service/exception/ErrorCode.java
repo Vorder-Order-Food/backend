@@ -19,6 +19,7 @@ public enum ErrorCode {
     EMAIL_IS_REQUIRED(1009, "Email is required", HttpStatus.BAD_REQUEST),
     EMAIL_NOT_VERIFIED(1010, "Account is not verified !!", HttpStatus.BAD_REQUEST),
     CART_CREATION_FAILED(1011, "Create cart failed !!", HttpStatus.BAD_REQUEST),
+    OUT_OF_STOCK(1012, "Product out of stock", HttpStatus.BAD_REQUEST),
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {

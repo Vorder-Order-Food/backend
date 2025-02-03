@@ -6,6 +6,7 @@ import com.vorder.event.NotificationEvent;
 import com.vorder.order_service.dto.CartDto;
 import com.vorder.order_service.dto.CartItemDto;
 import com.vorder.order_service.dto.UserDto;
+import com.vorder.order_service.dto.request.InventoryUpdateRequest;
 import com.vorder.order_service.dto.request.OrderRequest;
 import com.vorder.order_service.entity.Order;
 import com.vorder.order_service.entity.OrderItem;
@@ -58,6 +59,8 @@ public class OrderService {
                 .build();
 
         List<OrderItem> orderItems = new ArrayList<>();
+        List<InventoryUpdateRequest> requests = new ArrayList<>();
+
 
 
 
@@ -76,6 +79,9 @@ public class OrderService {
 
                 OrderItem savedOrderItem = orderItemRepository.save(orderItem);
                 orderItems.add(savedOrderItem);
+
+                requests.add(new InventoryUpdateRequest(cartItem.getProductId(), cartItem.getQuantity()));
+
             } else {
                 throw new AppException(ErrorCode.OUT_OF_STOCK);
             }
@@ -92,6 +98,8 @@ public class OrderService {
         order.setTotalPrice(totalPrice);
 
         Order savedOrder = orderRepository.save(order);
+
+        inventoryClient.updateStock(requests);
 
         UserDto user = userClient.getUser(authentication.getName());
 

@@ -13,5 +13,6 @@ import java.util.List;
 public class ProductRequest {
     String name;
     Long price;
+    Integer quantity;
     List<String> images;
 }
