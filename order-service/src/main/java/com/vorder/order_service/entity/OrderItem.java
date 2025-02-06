@@ -18,16 +18,12 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    // Reference to the product by its ID
     private String productId;
 
-    // Copy relevant product details for convenience
     private String productName;
     private Long productPrice;
 
-    // Quantity of this product in the order
     private int quantity;
 
-    // Total price for this item (productPrice * quantity)
     private Long totalPrice;
 }

@@ -1,5 +1,6 @@
 package com.example.inventory_service.service;
 
+import com.example.inventory_service.dto.InventoryDto;
 import com.example.inventory_service.dto.request.CreateInventoryRequest;
 import com.example.inventory_service.dto.request.InventoryUpdateRequest;
 import com.example.inventory_service.dto.response.CreateInventoryResponse;
@@ -8,6 +9,7 @@ import com.example.inventory_service.exception.AppException;
 import com.example.inventory_service.exception.ErrorCode;
 import com.example.inventory_service.mapper.InventoryMapper;
 import com.example.inventory_service.repository.InventoryRepository;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -24,6 +26,10 @@ public class InventoryService {
 
     InventoryRepository inventoryRepository;
     InventoryMapper inventoryMapper;
+
+    public List<Inventory> findAll() {
+        return inventoryRepository.findAll();
+    }
 
     public CreateInventoryResponse createInventory(CreateInventoryRequest createInventoryRequest) {
         Inventory inventory = inventoryMapper.toInventory(createInventoryRequest);

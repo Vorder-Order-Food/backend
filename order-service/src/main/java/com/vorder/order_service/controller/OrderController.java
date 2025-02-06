@@ -1,6 +1,7 @@
 package com.vorder.order_service.controller;
 
 import com.vorder.order_service.dto.ApiResponse;
+import com.vorder.order_service.dto.OrderDto;
 import com.vorder.order_service.dto.request.OrderRequest;
 import com.vorder.order_service.dto.response.OrderResponse;
 import com.vorder.order_service.entity.Order;
@@ -23,8 +24,8 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping("/create")
-    ApiResponse<Order> createOrder(@RequestBody OrderRequest orderRequest) {
-        return ApiResponse.<Order>builder()
+    ApiResponse<OrderDto> createOrder(@RequestBody OrderRequest orderRequest) {
+        return ApiResponse.<OrderDto>builder()
                 .result(orderService.createOrder(orderRequest))
                 .build();
     }

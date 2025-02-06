@@ -1,0 +1,22 @@
+server:
+  port: 8086
+  servlet:
+    context-path: /payment
+spring:
+  application:
+    name: payment-service
+  data:
+    mongodb:
+      uri: mongodb://root:viet12345@localhost:27017/payment-service?authSource=admin
+app:
+  services:
+    order: http://localhost:8084
+payment:
+  vnpay:
+    url: "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"
+    returnUrl: "http://localhost:8888/api/v1/payment/vn-pay-callback"
+    tmnCode: "12N5O7DV"
+    secretKey: "GEU5SL8GZKNP0QZZ5NO9ZU4XRV1W0902"
+    version: "2.1.0"
+    command: "pay"
+    orderType: "other"

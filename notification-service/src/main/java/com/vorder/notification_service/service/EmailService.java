@@ -19,15 +19,16 @@ import java.util.List;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 public class EmailService {
     EmailClient emailClient;
 
-    public EmailService(EmailClient emailClient) {
-        this.emailClient = emailClient;
-        this.apiKey = System.getenv("API_KEY"); // Get API_KEY from environment
-    }
+//    public EmailService(EmailClient emailClient) {
+//        this.emailClient = emailClient;
+//        this.apiKey = System.getenv("API_KEY");
+//    }
 
-//    @Value("${notification.email.brevo-apikey}")
+    @Value("${notification.email.brevo-apikey}")
     @NonFinal
     String apiKey;
 

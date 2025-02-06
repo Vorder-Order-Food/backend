@@ -22,7 +22,7 @@ public class NotificationController {
 
 
 
-    @KafkaListener(topics = "notification-send")
+    @KafkaListener(topics = "notification-send-mono")
     public void listenNotificationDelivery(NotificationEvent message){
         log.info("Message received: {}", message);
         emailService.sendEmail(SendEmailRequest.builder()

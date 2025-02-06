@@ -5,6 +5,7 @@ import com.nimbusds.jose.Payload;
 import com.vorder.event.NotificationEvent;
 import com.vorder.order_service.dto.CartDto;
 import com.vorder.order_service.dto.CartItemDto;
+import com.vorder.order_service.dto.OrderDto;
 import com.vorder.order_service.dto.UserDto;
 import com.vorder.order_service.dto.request.InventoryUpdateRequest;
 import com.vorder.order_service.dto.request.OrderRequest;
@@ -12,6 +13,7 @@ import com.vorder.order_service.entity.Order;
 import com.vorder.order_service.entity.OrderItem;
 import com.vorder.order_service.exception.AppException;
 import com.vorder.order_service.exception.ErrorCode;
+import com.vorder.order_service.mapper.OrderMapper;
 import com.vorder.order_service.repository.OrderItemRepository;
 import com.vorder.order_service.repository.OrderRepository;
 import com.vorder.order_service.repository.http.CartClient;
@@ -45,9 +47,10 @@ public class OrderService {
     UserClient userClient ;
     KafkaTemplate<String, Object> kafkaTemplate;
     InventoryClient inventoryClient;
+    OrderMapper orderMapper;
 
 
-    public Order createOrder(OrderRequest orderRequest) {
+    public OrderDto createOrder(OrderRequest orderRequest) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         CartDto cartDto = cartClient.getCartByUserId(authentication.getName());
@@ -60,8 +63,6 @@ public class OrderService {
 
         List<OrderItem> orderItems = new ArrayList<>();
         List<InventoryUpdateRequest> requests = new ArrayList<>();
-
-
 
 
         for (CartItemDto cartItem : cartDto.getItems()) {
@@ -109,12 +110,12 @@ public class OrderService {
                 .channel("EMAIL")
                 .recipient(user.getEmail())
                 .subject("Order Confirmation")
-                .body("order sucess")
+                .body("Thank you for choosing us! Your order has been confirmed!")
                 .build();
 
-        kafkaTemplate.send("notification-send", notificationEvent);
+        kafkaTemplate.send("notification-send-mono", notificationEvent);
 
-        return savedOrder;
+        return orderMapper.toDto(savedOrder);
     }
 
     public String getIdFromJwt(String jwt) throws Exception {
