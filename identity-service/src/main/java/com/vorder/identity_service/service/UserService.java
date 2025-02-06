@@ -91,7 +91,7 @@ public class UserService {
                 .build();
 
         // Publish message to kafka
-        kafkaTemplate.send("notification-send", notificationEvent);
+        kafkaTemplate.send("notification-send-mono", notificationEvent);
 
         return userMapper.toUserResponse(user);
     }
