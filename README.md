@@ -1,8 +1,13 @@
 # Order Food Website 
 
 # Microservices Inside This Project
-- Identity Service
-- Cart Service: response for 
+Identity Service: Handles all user-related operations such as registration and login.
+Cart Service: Responsible for managing the user's shopping cart.
+Order Service: Manages user orders, including creation, tracking, and history.
+Payment Service: Handles online payment processing.
+Product Service: Manages product information, including creation, updates, and retrieval.
+Inventory Service: Controls and monitors product stock levels.
+Notification Service: Sends emails for user registration verification and order confirmation.
 
 # Base Project Architecture
 
