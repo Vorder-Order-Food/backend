@@ -18,8 +18,8 @@ Vorder is an online platform that allows users to browse, select, and order food
 
 ### Backend
 - **Java 21**
-- **Spring Boot 3.2.4**
-- **Spring Cloud 2023.0.0**
+- **Spring Boot 3.1.5**
+- **Spring Cloud 2022.0.4**
 - **Netflix Eureka (Service Registry & Client)**
 - **Spring Cloud API Gateway**
 - **Spring Cloud Config Server**
