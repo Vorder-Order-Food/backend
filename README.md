@@ -16,21 +16,17 @@ Vorder is an online platform that allows users to browse, select, and order food
 
 # Technology Stack
 
-1. Java 21
-Spring Boot 3.2.4
-Spring Cloud 2023.0.0
-Netflix Eureka Service Registry
-Netflix Eureka Service Client
-Spring Cloud API Gateway
-Spring Cloud Config Server
-Zipkin
-Spring Cloud Sleuth
-Open Feign
-RabbitMQ
-Prometheus
-MySQL
-Keycloak
-Docker / Docker Compose
-Kubernetes
-Keycloak
+- **Java 21**
+- **Spring Boot 3.2.4**
+- **Spring Cloud 2023.0.0**
+- **Netflix Eureka (Service Registry & Client)**
+- **Spring Cloud API Gateway**
+- **Spring Cloud Config Server**
+- **Zipkin & Spring Cloud Sleuth**
+- **OpenFeign**
+- **Kafka**
+- **Prometheus**
+- **MySQL**
+- **Docker / Docker Compose**
+- **Kubernetes**
 
