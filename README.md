@@ -16,6 +16,7 @@ Vorder is an online platform that allows users to browse, select, and order food
 
 # Technology Stack
 
+### Backend
 - **Java 21**
 - **Spring Boot 3.2.4**
 - **Spring Cloud 2023.0.0**
@@ -25,8 +26,13 @@ Vorder is an online platform that allows users to browse, select, and order food
 - **Zipkin & Spring Cloud Sleuth**
 - **OpenFeign**
 - **Kafka**
-- **Prometheus**
 - **MySQL**
 - **Docker / Docker Compose**
 - **Kubernetes**
+
+### Frontend
+- **React** with **Redux** for state management
+- **Tailwind CSS** 
+- **MUI (css component library)** 
+- **VNPay** for payment integration
 
