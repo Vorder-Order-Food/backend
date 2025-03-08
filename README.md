@@ -27,6 +27,7 @@ Vorder is an online platform that allows users to browse, select, and order food
 - **OpenFeign**
 - **Kafka**
 - **MySQL**
+- **MongoDB**
 - **Docker / Docker Compose**
 - **Kubernetes**
 
